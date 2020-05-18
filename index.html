@@ -10,12 +10,11 @@
 <body>
 	<div id="popup">
 		<div id="popup-content">
-			<div>
-				<div>Join an existing chatroom:</div>
-				<input type="text" id="join" minlength="4" maxlength="8" size="10" required>
-			</div>
+			<div>Join an existing chatroom:</div>
+			<input type="text" id="join" minlength="34" maxlength="34" size="34" spellcheck="false" onkeydown="join(this)">
 			<hr style="margin: 16px 0">
-			<div>Create a new chatroom</div>
+			<div>Create a new chatroom:</div>
+			<button id="create" onclick="init()">CREATE</button>
 		</div>
 	</div>
 
