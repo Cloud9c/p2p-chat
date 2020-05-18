@@ -17,7 +17,7 @@ function init(id = false) {
 
 	if (id) {
 		console.log(id)
-		b = Bugout(id);
+		b = new Bugout(id);
 	}
 	else
 		b = new Bugout();
