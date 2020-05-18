@@ -4,63 +4,26 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<title>P2P Chat App</title>
-	<style>
-		body {
-			background-color: #333;
-			font-size: 1.5em;
-			padding: 0em 0.25em;
-		}
-		pre {
-			color: #fff;
-			white-space: pre-wrap;
-			word-wrap: break-word;
-			text-shadow: 0 0 10px #ccc;
-		}
-		#input {
-			border-bottom: 1px solid #ccc;
-			background-color: #383838;
-			padding: 0.25em;
-			outline: 0;
-		}
-		#input::before {
-			content: "> ";
-		}
-	</style>
+	<link href="main.css" rel="stylesheet" type="text/css" />
 	<script src="https://chr15m.github.io/bugout/bugout.min.js" type="application/javascript"></script>
 </head>
 <body>
-	<pre id="log"></pre>
-	<pre id="input" contenteditable="true"></pre>
+	<div id="popup">
+		<div id="popup-content">
+			<div>
+				<div>Join an existing chatroom:</div>
+				<input type="text" id="join" minlength="4" maxlength="8" size="10" required>
+			</div>
+			<hr style="margin: 16px 0">
+			<div>Create a new chatroom</div>
+		</div>
+	</div>
+
+	<div id="chat">
+		<div id="log"></div>
+		<div id="input" contenteditable="true"></div>
+	</div>
+
+	<script src="main.js" type="application/javascript"></script>
 </body>
-<script>
-	function log(message) {
-	  document.getElementById("log").textContent += message + "\n";
-	}
-
-	const b = new Bugout();
-
-	console.log("address: " + b.address())
-	console.log("seed: " + b.seed)
-	console.log("%c" + "🏴‍☠️Chum Dawg Territory🏴‍☠️", "color: red; -webkit-text-stroke: 2px black; font-size: 72px; font-weight: bold;");
-
-	b.on("seen", function(address) {
-		log(address + " [ seen ]");
-	});
-
-	b.on("message", function(address, message) {
-	  log(address + ": " + message);
-	});
-
-	log(b.address() + " [ me ]");
-
-	document.getElementById("input").addEventListener("keydown", e => {
-		if (e.keyCode == 13) {
-			if (b.lastwirecount) {
-				b.send(e.target.textContent);
-				e.target.textContent = "";
-			}
-			e.preventDefault();
-		}
-	});
-</script>
 </html>
