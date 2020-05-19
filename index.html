@@ -4,25 +4,36 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
 	<title>P2P Chat App</title>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 	<link href="main.css" rel="stylesheet" type="text/css" />
 	<script src="https://chr15m.github.io/bugout/bugout.min.js" type="application/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/identicon.js/2.3.3/identicon.min.js" type="application/javascript"></script>
 </head>
 <body>
 	<div id="popup">
 		<div id="popup-content">
-			<div>Join an existing chatroom:</div>
-			<input type="text" id="join" size="32" spellcheck="false" onkeydown="join(this)">
-			<hr style="margin: 16px 0">
-			<div>Create a new chatroom:</div>
-			<button id="create" onclick="init()">CREATE</button>
+			<div id="part1">
+				<div>Join an existing chatroom:</div>
+				<input type="text" id="join" size="32" spellcheck="false" autocomplete="off" onkeydown="goToNickname(true)">
+				<hr style="margin: 16px 0">
+				<div>Create a new chatroom:</div>
+				<button id="create" onclick="goToNickname()">CREATE</button>
+			</div>
+			<div id="part2" style="display: none">
+				<div>Nickname:</div>
+				<input type="text" id="nickname" size="32" maxlength="32" spellcheck="false" autocomplete="off" onkeydown="goToInit()">
+			</div>
 		</div>
 	</div>
 
 	<div id="id"></div>
 
-	<div id="chat">
-		<pre id="log"></pre>
-		<pre id="input" contenteditable="true"></pre>
+	<div id="chat-container">
+		<div id="chat">
+			<div id="log"></div>
+			<input id="input" type="text" autocomplete="off" placeholder="Send something here..."></input>
+		</div>
+		<div id="list"></div>
 	</div>
 
 	<script src="main.js" type="application/javascript"></script>
