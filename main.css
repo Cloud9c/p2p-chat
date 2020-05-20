@@ -3,7 +3,27 @@ body {
 	margin: 0;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
-	color: #fff;
+	color: rgba(255, 255, 255, 0.87);
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px
+}
+
+::-webkit-scrollbar-track {
+	background-color: #292929;
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #5A5A5A;
+	border-radius: 16px
+}
+
+::-webkit-scrollbar-button {
+	height: 0;
+	width: 0
 }
 
 #chat-container {
@@ -13,7 +33,7 @@ body {
 }
 
 #chat {
-	padding: 16px;
+	padding: 16px 8px 16px 16px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -21,6 +41,8 @@ body {
 
 #log {
 	flex: 1;
+	max-height: calc(100vh - 74px);
+	overflow: auto;
 }
 
 #input {
@@ -28,7 +50,7 @@ body {
 	color: white;
 	padding: 12px 16px;
 	outline: 0;
-	width: 100%;
+	width: calc(100% - 16px);;
 	border: none;
 	font-size: 16px;
 	border-radius: 8px;
@@ -49,7 +71,7 @@ body {
 
 #popup-content {
 	padding: 20px;
-	background: #121212;
+	background: #303030;
 	text-align: center;
 	border-radius: 8px;
 }
@@ -66,8 +88,29 @@ body {
 }
 
 #list {
-	background: #212121;
+	background: #292929;
 	float: right;
-	width: 200px;
+	width: 240px;
 	height: 100%;
+}
+
+.message {
+	display: flex;
+    margin-bottom: 24px;
+    word-break: break-all;
+}
+
+.profile {
+	border-radius: 50%;
+	vertical-align: top;
+	width: 40px;
+	height: 40px;
+}
+
+.content {
+	padding-left: 8px;
+}
+
+.text {
+	color: rgba(255, 255, 255, 0.87);
 }
