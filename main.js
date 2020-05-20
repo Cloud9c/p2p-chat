@@ -7,13 +7,32 @@ const identity = new Object(); //address, [nickname,svg]
 let nickname;
 let id = "";
 
+function blendColors(colorA, colorB, amount) {
+	const [rA, gA, bA] = colorA.match(/\w\w/g).map((c) => parseInt(c, 16));
+	const [rB, gB, bB] = colorB.match(/\w\w/g).map((c) => parseInt(c, 16));
+	const r = Math.round(rA + (rB - rA) * amount).toString(16).padStart(2, '0');
+	const g = Math.round(gA + (gB - gA) * amount).toString(16).padStart(2, '0');
+	const b = Math.round(bA + (bB - bA) * amount).toString(16).padStart(2, '0');
+	return '#' + r + g + b;
+}
+
+window.onload = () => {
+	const colors = ["#4B2882", "#2E5793", "#177245", "#C96112", "#C1301C"];
+	const randomColor = colors[Math.floor(Math.random() * colors.length)];
+	document.documentElement.style.setProperty('--random', randomColor);
+	document.documentElement.style.setProperty('--dark1', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark1'), randomColor, 0.2));
+	document.documentElement.style.setProperty('--dark2', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark2'), randomColor, 0.2));
+	document.documentElement.style.setProperty('--dark3', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark3'), randomColor, 0.2));
+
+};
+
 function log(address, data) {
 	const message = document.createElement("div");
 	message.classList.add("message");
 
 	const profile = document.createElement("img");
 	profile.classList.add("profile");
-	profile.src = "data:image/svg+xml;base64," + identity[address][1];
+	profile.src = "data:image/png;base64," + identity[address][1];
 
 	const content = document.createElement("div");
 	content.classList.add("content");
@@ -69,7 +88,7 @@ function init() {
 	b.heartbeat(5); // maybe too fast?
 
 	const clientAddress = b.address();
-	const data = new Identicon(clientAddress, {size: 40, format: 'svg'}).toString();
+	const data = new Identicon(clientAddress, 40).toString();
 
 	identity[clientAddress] = [nickname, data];
 
@@ -78,7 +97,7 @@ function init() {
 
 	const profile = document.createElement("img");
 	profile.classList.add("profile");
-	profile.src = "data:image/svg+xml;base64," + data;
+	profile.src = "data:image/png;base64," + data;
 
 	const usernameContainer = document.createElement("div");
 	usernameContainer.classList.add("username-container");
@@ -94,7 +113,7 @@ function init() {
 	document.getElementById("list").appendChild(user);
 
 	b.on("seen", (address) => {
-		identity[address] = ["Unnamed", new Identicon(address, {size: 40, format: 'svg'}).toString()]
+		identity[address] = ["Unnamed", new Identicon(address, 40).toString()]
 		b.send(address, 0 + nickname);
 	});
 

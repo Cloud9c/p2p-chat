@@ -6,8 +6,6 @@
 	<title>P2P Chat App</title>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 	<link href="main.css" rel="stylesheet" type="text/css" />
-	<script src="https://chr15m.github.io/bugout/bugout.min.js" type="application/javascript"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/identicon.js/2.3.3/identicon.min.js" type="application/javascript"></script>
 </head>
 <body>
 	<div id="popup">
@@ -16,8 +14,7 @@
 				<div>Join an existing chatroom:</div>
 				<input type="text" id="join" size="32" spellcheck="false" autocomplete="off" onkeydown="goToNickname(true)">
 				<hr style="margin: 16px 0">
-				<div>Create a new chatroom:</div>
-				<button id="create" onclick="goToNickname()">CREATE</button>
+				<button id="create" onclick="goToNickname()">Create a Chatroom</button>
 			</div>
 			<div id="part2" style="display: none">
 				<div>Nickname:</div>
@@ -39,6 +36,9 @@
 		</div>
 	</div>
 
+	<script src="https://chr15m.github.io/bugout/bugout.min.js" type="application/javascript"></script>
+	<script src="https://www.xarg.org/download/pnglib.js" type="application/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/identicon.js/2.3.3/identicon.min.js" type="application/javascript"></script>
 	<script src="main.js" type="application/javascript"></script>
 </body>
 </html>
