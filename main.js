@@ -66,7 +66,7 @@ function init() {
 	div.textContent = id;
 	document.getElementById("id").append(div)
 	const b = new Bugout(id.toLowerCase());
-	b.heartbeat(1); // maybe too fast?
+	b.heartbeat(5); // maybe too fast?
 
 	const clientAddress = b.address();
 	const data = new Identicon(clientAddress, {size: 40, format: 'svg'}).toString();
