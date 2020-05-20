@@ -82,9 +82,11 @@ body {
 }
 
 #id {
-	position: fixed;
-	top: 16px;
-	right: 16px;
+	margin: 8px;
+	padding: 8px;
+	text-align: center;
+	border: 1px solid green;
+	border-radius: 8px;
 }
 
 #list {
@@ -113,4 +115,19 @@ body {
 
 .text {
 	color: rgba(255, 255, 255, 0.6);
+}
+
+.user {
+	margin: 16px;
+	display: flex;
+}
+
+.username-container {
+	margin-left: 8px;
+	display: flex;
+}
+
+.username {
+	font-size: 20px;
+	margin: auto;
 }

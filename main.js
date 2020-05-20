@@ -62,7 +62,7 @@ function init() {
 		}
 	}
 
-	document.getElementById("id").textContent = "Join Code: " + id;
+	document.getElementById("id").textContent = id;
 	const b = new Bugout(id.toLowerCase());
 	b.heartbeat(1); // maybe too fast?
 
@@ -71,19 +71,72 @@ function init() {
 
 	identity[clientAddress] = [nickname, data];
 
-	b.on("seen", function(address) {
+	const user = document.createElement("div");
+	user.classList.add("user")
+
+	const profile = document.createElement("img");
+	profile.classList.add("profile");
+	profile.src = "data:image/svg+xml;base64," + data;
+
+	const usernameContainer = document.createElement("div");
+	usernameContainer.classList.add("username-container");
+
+	const username = document.createElement("div");
+	username.classList.add("username");
+	username.textContent = nickname + " (me)";
+
+	usernameContainer.appendChild(username);
+	user.appendChild(profile);
+	user.appendChild(usernameContainer);
+
+	document.getElementById("list").appendChild(user);
+
+	b.on("seen", (address) => {
 		identity[address] = ["Unnamed", new Identicon(address, {size: 40, format: 'svg'}).toString()]
 		b.send(address, 0 + nickname);
 	});
 
-	b.on("message", function(address, message) {
+	b.on("left", (address) => {
+		delete identity[address];
+	})
+
+	b.on("message", (address, message) => {
 		console.log(message)
 		const type = parseInt(message.charAt(0));
 		message = message.substr(1);
 		switch(type) {
 			case 0:
-				console.log("case 0: " + message)
 				identity[address][0] = message;
+
+				const user = document.createElement("div");
+				user.classList.add("user")
+
+				const profile = document.createElement("img");
+				profile.classList.add("profile");
+				profile.src = "data:image/svg+xml;base64," + identity[address][1];
+
+				const usernameContainer = document.createElement("div");
+				usernameContainer.classList.add("username-container");
+
+				const username = document.createElement("div");
+				username.classList.add("username");
+				username.textContent = message;
+
+				usernameContainer.appendChild(username);
+				user.appendChild(profile);
+				user.appendChild(usernameContainer);
+
+				const list = document.getElementById("list");
+				const children = list.children;
+				for (i = 1; i < children.length; i++) {
+					if (message <= children[i].getElementsByClassName("username")[0].textContent) {
+						list.insertBefore(user, children[i]);
+						return;
+					}
+				}
+
+				list.append(user);
+
 				break;
 
 			case 1:
