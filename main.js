@@ -4,9 +4,8 @@ const dict = ["aaron","aback","abandon","abash","abate","abbey","abbot","abbott"
 // 1 - text message
 
 const identity = new Object(); //address, [nickname,svg]
-let nickname = "";
+let nickname;
 let id = "";
-let b;
 
 function log(address, data) {
 	const message = document.createElement("div");
@@ -14,14 +13,14 @@ function log(address, data) {
 
 	const profile = document.createElement("img");
 	profile.classList.add("profile");
-	profile.src = "data:image/svg+xml;base64," + "EE";
+	profile.src = "data:image/svg+xml;base64," + identity[address][1];
 
 	const content = document.createElement("div");
 	content.classList.add("content");
 
 	const title = document.createElement("div");
 	title.classList.add("title");
-	title.textContent = address;
+	title.textContent = identity[address][0];
 
 	const text = document.createElement("div");
 	text.classList.add("text");
@@ -64,15 +63,17 @@ function init() {
 	}
 
 	document.getElementById("id").textContent = "Join Code: " + id;
-	b = new Bugout(id.toLowerCase());
+	const b = new Bugout(id.toLowerCase());
+	b.heartbeat(1); // maybe too fast?
 
-	const address = b.address();
-	const data = new Identicon(address, {size: 40, format: 'svg'}).toString();
+	const clientAddress = b.address();
+	const data = new Identicon(clientAddress, {size: 40, format: 'svg'}).toString();
 
-	identity[address] = [nickname, data];
+	identity[clientAddress] = [nickname, data];
 
 	b.on("seen", function(address) {
-		// log(address + " [ seen ]");
+		identity[address] = ["Unnamed", new Identicon(address, {size: 40, format: 'svg'}).toString()]
+		b.send(address, 0 + nickname);
 	});
 
 	b.on("message", function(address, message) {
@@ -82,8 +83,7 @@ function init() {
 		switch(type) {
 			case 0:
 				console.log("case 0: " + message)
-				identity[address] = message.split(",");
-				b.send(address, 0 + [nickname, data]);
+				identity[address][0] = message;
 				break;
 
 			case 1:
@@ -92,17 +92,12 @@ function init() {
 		}
 	})
 
-	b.send(0 + [nickname, data]); // send identity to everyone
-
-
 	document.getElementById("input").addEventListener("keydown", e => {
-		if (e.keyCode == 13 && e.target.value != "") {
+		if (e.keyCode == 13 && b.lastwirecount && e.target.value != "") {
 			b.send(1 + e.target.value);
 			e.target.value = "";
 		}
 	});
-	console.log("address: " + address)
-	console.log("seed: " + b.seed)
 }
 
 
