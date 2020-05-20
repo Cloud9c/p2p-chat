@@ -134,7 +134,7 @@ function init() {
 
 				const profile = document.createElement("img");
 				profile.classList.add("profile");
-				profile.src = "data:image/svg+xml;base64," + identity[address][1];
+				profile.src = "data:image/png;base64," + identity[address][1];
 
 				const usernameContainer = document.createElement("div");
 				usernameContainer.classList.add("username-container");
