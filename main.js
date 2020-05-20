@@ -62,7 +62,9 @@ function init() {
 		}
 	}
 
-	document.getElementById("id").textContent = id;
+	const div = document.createElement("div");
+	div.textContent = id;
+	document.getElementById("id").append(div)
 	const b = new Bugout(id.toLowerCase());
 	b.heartbeat(1); // maybe too fast?
 
