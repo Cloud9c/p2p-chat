@@ -14,22 +14,22 @@ body {
 	color: var(--whitetext1);
 }
 
-::-webkit-scrollbar {
+#log::-webkit-scrollbar {
 	width: 8px;
 	height: 8px
 }
 
-::-webkit-scrollbar-track {
+#log::-webkit-scrollbar-track {
 	background-color: var(--dark1);
 	border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb {
+#log::-webkit-scrollbar-thumb {
 	background-color: #5A5A5A;
 	border-radius: 16px
 }
 
-::-webkit-scrollbar-button {
+#log::-webkit-scrollbar-button {
 	height: 0;
 	width: 0
 }
@@ -53,16 +53,29 @@ body {
 	overflow: auto;
 }
 
-#input {
+#input-field {
 	background-color: var(--dark2);
+	width: calc(100% - 16px);;
+	border-radius: 8px;
+	box-sizing: border-box;
+	display: flex;
+}
+
+#input {
+	background: none;
 	color: white;
 	padding: 12px 16px;
 	outline: 0;
-	width: calc(100% - 16px);;
 	border: none;
 	font-size: 16px;
-	border-radius: 8px;
-	box-sizing: border-box;
+	flex: 1;
+}
+
+#emoji-button {
+	display: inline;
+	float: right;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 
 #popup {
@@ -87,6 +100,10 @@ body {
 #join, #nickname {
 	margin-top: 8px;
 	text-align: center;
+}
+
+#nickname {
+	width: 80%;
 }
 
 #id {
@@ -145,7 +162,6 @@ body {
 
 button {
 	padding: 12px;
-	width: 80%;
 	border-radius: 8px;
 	border: none;
 	font-family: 'Roboto';

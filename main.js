@@ -23,7 +23,20 @@ window.onload = () => {
 	document.documentElement.style.setProperty('--dark1', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark1'), randomColor, 0.2));
 	document.documentElement.style.setProperty('--dark2', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark2'), randomColor, 0.2));
 	document.documentElement.style.setProperty('--dark3', blendColors(getComputedStyle(document.documentElement).getPropertyValue('--dark3'), randomColor, 0.2));
+  
+	const button = document.querySelector('#emoji-button');
+	const picker = new EmojiButton({
+		position: "top-end",
+		emojiSize: "1.6em"
+	});
 
+	picker.on('emoji', emoji => {
+		document.querySelector('input').value += emoji;
+	});
+
+	button.addEventListener('click', () => {
+	picker.togglePicker(button);
+	});
 };
 
 function log(address, data) {
