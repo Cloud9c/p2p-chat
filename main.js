@@ -185,6 +185,4 @@ function init() {
 	});
 }
 
-
-
 console.log("%c" + "🏴‍☠️Chum Dawg Territory🏴‍☠️", "color: red; -webkit-text-stroke: 2px black; font-size: 72px; font-weight: bold;");
